@@ -88,3 +88,4 @@ class EditPlan(BaseModel):
     captions: CaptionsConfig = Field(default_factory=CaptionsConfig)
     overlays: List[Overlay] = Field(default_factory=list)
     audio_config: AudioConfig = Field(default_factory=AudioConfig)
+

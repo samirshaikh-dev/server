@@ -41,3 +41,4 @@ settings = Settings()
 (settings.DATA_DIR / "assets" / "fonts").mkdir(parents=True, exist_ok=True)
 (settings.DATA_DIR / "assets" / "music").mkdir(parents=True, exist_ok=True)
 (settings.DATA_DIR / "assets" / "sfx").mkdir(parents=True, exist_ok=True)
+

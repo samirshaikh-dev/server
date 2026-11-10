@@ -74,3 +74,4 @@ def invert_silences_to_speech(
         speech_ranges.append((current_pos, total_duration))
 
     return speech_ranges
+

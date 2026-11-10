@@ -66,3 +66,4 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     full_content = header + "\n".join(events) + "\n"
     output_ass_path.write_text(full_content, encoding="utf-8")
     return output_ass_path
+

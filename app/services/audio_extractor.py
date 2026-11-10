@@ -30,3 +30,4 @@ def extract_audio(video_path: Path, output_audio_path: Path) -> Path:
         raise RuntimeError(f"Failed to extract audio from {video_path}: {result.stderr}")
 
     return output_audio_path
+

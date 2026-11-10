@@ -87,3 +87,4 @@ def render_project(
         raise RuntimeError(f"FFmpeg rendering failed: {result.stderr}")
 
     return output_video_path
+

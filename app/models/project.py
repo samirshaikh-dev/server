@@ -38,3 +38,4 @@ class ProjectMetadata(BaseModel):
     current_step: str = ""
     error_message: Optional[str] = None
     output_video_path: Optional[str] = None
+

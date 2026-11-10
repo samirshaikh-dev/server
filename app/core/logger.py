@@ -17,3 +17,4 @@ def get_logger(name: str = "ai_video_editor") -> logging.Logger:
 
 
 logger = get_logger()
+

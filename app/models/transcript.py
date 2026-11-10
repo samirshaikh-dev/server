@@ -25,3 +25,4 @@ class TranscriptResult(BaseModel):
     full_text: str
     segments: List[Segment] = Field(default_factory=list)
     words: List[WordTimestamp] = Field(default_factory=list)
+

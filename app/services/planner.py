@@ -90,43 +90,68 @@ async def generate_edit_plan_llm(
     target_duration: Optional[float] = None
 ) -> EditPlan:
     """
-    Calls local Ollama or OpenAI compatible endpoint to generate an edit plan.
-    Falls back gracefully to deterministic cuts if the LLM request fails.
+    Calls Google Gemini API (gemini-2.5-flash) to generate a structured edit plan.
+    Enforces structured JSON output via response_mime_type.
     """
+    if not settings.GEMINI_API_KEY:
+        logger.info("GEMINI_API_KEY is not configured. Using deterministic planner.")
+        return build_deterministic_plan(project_id, transcript, platform, target_duration)
+
     system_instruction = (
-        "You are an expert video editor. Analyze the transcript timestamps and generate "
-        "a concise cut list removing filler words, pauses, and repetition. "
-        "Return strictly valid JSON conforming to the EditPlan schema."
+        "You are an expert short-form video editor for Instagram Reels and LinkedIn. "
+        "Analyze the transcript segments with timestamps and user prompt to create a high-retention EditPlan. "
+        "Select the strongest hook, cut filler/silences, alternate punch-in zooms (1.15x) for emphasis, "
+        "and calculate accurate timeline cut intervals. Return ONLY valid JSON adhering strictly to the EditPlan schema."
     )
 
     user_payload = {
-        "prompt": prompt,
-        "platform": platform.value,
+        "project_id": project_id,
+        "user_prompt": prompt,
+        "target_platform": platform.value,
         "target_duration": target_duration,
-        "segments": [{"start": s.start, "end": s.end, "text": s.text} for s in transcript.segments[:50]]
+        "transcript_segments": [
+            {"id": s.id, "start": s.start, "end": s.end, "text": s.text}
+            for s in transcript.segments[:60]
+        ]
+    }
+
+    gemini_url = (
+        f"https://generativelanguage.googleapis.com/v1beta/models/{settings.GEMINI_MODEL}:generateContent"
+        f"?key={settings.GEMINI_API_KEY}"
+    )
+
+    body = {
+        "system_instruction": {
+            "parts": [{"text": system_instruction}]
+        },
+        "contents": [
+            {
+                "parts": [{"text": json.dumps(user_payload)}]
+            }
+        ],
+        "generationConfig": {
+            "response_mime_type": "application/json",
+            "temperature": 0.2
+        }
     }
 
     try:
-        if settings.LLM_PROVIDER == "ollama":
-            async with httpx.AsyncClient(timeout=30.0) as client:
-                res = await client.post(
-                    f"{settings.OLLAMA_BASE_URL}/api/generate",
-                    json={
-                        "model": settings.OLLAMA_MODEL,
-                        "prompt": f"{system_instruction}\nInput:\n{json.dumps(user_payload)}",
-                        "format": "json",
-                        "stream": False
-                    }
-                )
-                if res.status_code == 200:
-                    data = res.json()
-                    parsed = json.loads(data.get("response", "{}"))
+        async with httpx.AsyncClient(timeout=45.0) as client:
+            res = await client.post(gemini_url, json=body)
+            if res.status_code == 200:
+                data = res.json()
+                candidates = data.get("candidates", [])
+                if candidates:
+                    content_text = candidates[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+                    parsed = json.loads(content_text)
                     if "timeline_cuts" in parsed:
-                        logger.info("Successfully generated EditPlan via Ollama")
-                        # Validate against EditPlan
+                        logger.info(f"Successfully generated EditPlan via Gemini ({settings.GEMINI_MODEL})")
+                        parsed["project_id"] = project_id
                         return EditPlan.model_validate(parsed)
+            else:
+                logger.error(f"Gemini API returned status {res.status_code}: {res.text}")
     except Exception as e:
-        logger.warning(f"LLM generation failed or unavailable ({e}). Using deterministic planner fallback.")
+        logger.warning(f"Gemini generation error ({e}). Falling back to deterministic plan.")
 
     return build_deterministic_plan(project_id, transcript, platform, target_duration)
 

@@ -7,7 +7,7 @@ A local-first, AI-powered video editing backend for turning raw talking-head vid
 - **FastAPI**: Asynchronous REST endpoints and Server-Sent Events (SSE) for live rendering progress.
 - **FFmpeg Engine**: Silence detection, dynamic 9:16 reframing, 1.15x punch-in zooms, sidechain audio ducking, and H.264/AAC muxing.
 - **Hormozi-Style Captions**: Word-by-word highlighted `.ass` subtitles with custom fonts and safe-zone positioning.
-- **AI Edit Planner**: Converts natural language prompts into a strict JSON `EditPlan` via local Ollama or deterministic heuristics.
+- **AI Edit Planner**: Converts natural language prompts into a strict JSON `EditPlan` via Google Gemini (`gemini-2.5-flash`) with structured output enforcement.
 - **Local Data Storage**: All raw assets, transcripts, and exports stay 100% on your machine in `./data/projects/`.
 
 ---
@@ -19,9 +19,9 @@ A local-first, AI-powered video editing backend for turning raw talking-head vid
    - Install via Chocolatey: `choco install ffmpeg`
    - Or install via winget: `winget install Gyan.FFmpeg`
    - Or download static binaries and put `ffmpeg.exe` on your system `PATH`.
-3. *(Optional)* **Ollama**:
-   - Download from [ollama.com](https://ollama.com)
-   - Run `ollama run llama3:8b` for local prompt planning.
+3. **Gemini API Key**:
+   - Obtain a free API key from [Google AI Studio](https://aistudio.google.com)
+   - Add `GEMINI_API_KEY=your_key_here` to your `.env` file.
 
 ---
 

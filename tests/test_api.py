@@ -14,6 +14,7 @@ class TestAPI(unittest.TestCase):
         data = response.json()
         self.assertEqual(data.get("status"), "online")
         self.assertIn("ffmpeg_bin", data)
+        self.assertIn("ai_model", data)
 
     def test_upload_and_get_project(self):
         # Create a mock video file payload

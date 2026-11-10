@@ -12,13 +12,9 @@ class Settings(BaseSettings):
     BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent
     DATA_DIR: Path = BASE_DIR / "data"
 
-    # LLM settings
-    LLM_PROVIDER: str = "ollama"
-    OLLAMA_BASE_URL: str = "http://localhost:11434"
-    OLLAMA_MODEL: str = "llama3:8b"
-    OPENAI_API_KEY: Optional[str] = None
-    OPENAI_BASE_URL: Optional[str] = "https://api.openai.com/v1"
-    OPENAI_MODEL: str = "gpt-4o-mini"
+    # Gemini AI settings
+    GEMINI_API_KEY: Optional[str] = None
+    GEMINI_MODEL: str = "gemini-2.5-flash"
 
     # Whisper
     WHISPER_MODEL: str = "base"

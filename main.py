@@ -28,7 +28,8 @@ def health_check():
         "status": "online",
         "ffmpeg_bin": get_ffmpeg_executable(),
         "data_dir": str(settings.DATA_DIR),
-        "llm_provider": settings.LLM_PROVIDER,
+        "ai_model": settings.GEMINI_MODEL,
+        "gemini_configured": bool(settings.GEMINI_API_KEY),
     }
 
 

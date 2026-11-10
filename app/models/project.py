@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Optional, Dict, Any
 from pydantic import BaseModel, Field
-from datetime import datetime
+from datetime import datetime, timezone
 from app.models.edit_plan import TargetPlatform, AspectRatio
 
 
@@ -32,7 +32,7 @@ class ProjectMetadata(BaseModel):
     width: int = 0
     height: int = 0
     fps: float = 30.0
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     status: JobStatus = JobStatus.IDLE
     progress_percentage: int = 0
     current_step: str = ""

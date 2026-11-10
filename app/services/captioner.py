@@ -8,7 +8,10 @@ def format_ass_time(seconds: float) -> str:
     hrs = int(seconds // 3600)
     mins = int((seconds % 3600) // 60)
     secs = int(seconds % 60)
-    cs = int((seconds - int(seconds)) * 100)
+    cs = int(round((seconds - int(seconds)) * 100))
+    if cs >= 100:
+        cs = 0
+        secs += 1
     return f"{hrs}:{mins:02d}:{secs:02d}.{cs:02d}"
 
 

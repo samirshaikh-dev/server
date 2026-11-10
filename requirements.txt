@@ -1,0 +1,24 @@
+# Core Web & API Framework
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+pydantic>=2.6.0
+pydantic-settings>=2.2.0
+python-multipart>=0.0.9
+python-dotenv>=1.0.1
+httpx>=0.27.0
+
+# Speech-to-Text & VAD
+faster-whisper>=1.0.0
+silero-vad>=5.1
+
+# Computer Vision & Face Tracking
+opencv-python>=4.9.0
+mediapipe>=0.10.11
+
+# Media Processing & Utilities
+ffmpeg-python>=0.2.0
+imageio-ffmpeg>=0.4.9
+numpy>=1.26.0
+
+# Background Worker & Queues (Local lightweight queue)
+# Optional: redis>=5.0.0, rq>=1.16.0

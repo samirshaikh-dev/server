@@ -1,0 +1,67 @@
+I am Samir, a software engineer. I do not know professional video editing. I want to build a local-only AI video editing tool for my personal use. I will use it to turn my raw talking-head videos into polished Instagram Reels and LinkedIn videos to attract freelance clients.
+
+I want a very simple local web UI where I can:
+
+Upload a raw video from my computer.
+
+Choose the output platform: Instagram Reel, LinkedIn, YouTube Short, or custom.
+
+Enter a natural-language prompt describing the edit I want.
+
+Set optional constraints such as target duration, caption style, tone, music mood, keywords, and sections to keep.
+
+Click “Generate.”
+
+See progress while the backend processes the video.
+
+Preview the final video and download the MP4.
+
+The backend should automatically:
+
+Transcribe the video with word-level timestamps.
+
+Understand my prompt and convert it into a structured editing plan.
+
+Remove silences, filler words, repeated takes, and low-value sections.
+
+Select the strongest highlights for a short-form video.
+
+Add accurate, well-timed captions.
+
+Reframe the video for the selected platform.
+
+Add subtle zoom-ins, punch-ins, transitions, and motion where appropriate.
+
+Add title cards, keyword pop-ups, lower-thirds, and simple motion graphics when useful.
+
+Add background music and sound effects, with music automatically lowered during speech.
+
+Export a clean MP4 in the correct aspect ratio.
+
+This will run only on my local machine. I do not need cloud deployment, multi-user authentication, payments, or a collaborative timeline editor.
+
+Please create a detailed R&D and implementation plan for a solo software engineer. Include:
+
+The simplest possible architecture for a local-first MVP.
+
+A Python-first backend design using FastAPI, Redis, Celery/RQ, FFmpeg, faster-whisper, and optional Remotion.
+
+A simple Next.js frontend design with upload, prompt, progress, preview, and download.
+
+How to convert a natural-language prompt into a strict JSON edit plan.
+
+A complete JSON schema for the edit plan.
+
+A step-by-step pipeline from raw video to final export.
+
+How to implement silence removal, filler-word removal, highlight selection, captions, zoom/punch-ins, reframing, motion graphics, and audio mixing.
+
+Local folder structure and file formats for raw videos, transcripts, edit plans, intermediate assets, and exports.
+
+A realistic 4-week build roadmap.
+
+The minimum features needed for a first usable version.
+
+Common failure cases and how to handle them.
+
+A quality checklist to ensure the output looks professional enough for Instagram and LinkedIn.

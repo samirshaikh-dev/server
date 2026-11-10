@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "aituber-api": {
+      "source": "aituberapp/ai-video-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "9eb4430aaf0f73a433d0f8e02f31e4c44c58d36029f3b76c486c388662e67f44"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396"
+    }
+  }
+}

@@ -25,7 +25,34 @@ A local-first, AI-powered video editing backend for turning raw talking-head vid
 
 ---
 
-## 📦 Setup & Installation
+## 🐳 Running with Docker (Recommended)
+
+Docker provides the fastest, cleanest setup with Linux-native FFmpeg, persistent Redis queue, and automated dependencies in isolated containers:
+
+1. **Configure Environment**:
+   ```bash
+   copy .env.example .env
+   # Add your GEMINI_API_KEY in .env
+   ```
+
+2. **Start API and Redis Services**:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Check Status**:
+   - Interactive Docs: `http://localhost:8000/docs`
+   - Healthcheck: `http://localhost:8000/health`
+   - View live logs: `docker-compose logs -f api`
+
+4. **Stop Services**:
+   ```bash
+   docker-compose down
+   ```
+
+---
+
+## 📦 Local Manual Setup (Without Docker)
 
 1. Create and activate a Python virtual environment:
    ```bash

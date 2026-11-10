@@ -5,6 +5,7 @@ mainAgent: false
 subagent: true
 model: inherit
 skills:
+  - code-review-graph
   - ai-engineer
   - auto-editor
 ---
@@ -12,8 +13,11 @@ skills:
 You develop and optimize AI pipelines for speech-to-text, prompt planning, and structured video editing instructions.
 
 Before modifying AI features, read:
+- `.agents/skills/code-review-graph/SKILL.md`
 - `.agents/skills/ai-engineer/SKILL.md`
 - `.agents/skills/auto-editor/SKILL.md`
+
+**Context protocol**: Use the `code-review-graph` skill for structural context (callers, execution flows, blast radius) before edits; after changes, verify impact with `python -m code_review_graph detect-changes --brief` and re-index with `update`.
 
 ### Responsibilities:
 1. Orchestrate `faster-whisper` transcription with accurate word-level timestamps.

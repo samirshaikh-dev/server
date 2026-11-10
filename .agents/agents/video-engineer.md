@@ -5,6 +5,7 @@ mainAgent: false
 subagent: true
 model: inherit
 skills:
+  - code-review-graph
   - video-editing
   - auto-editor
   - remotion-motion-graphics
@@ -13,9 +14,12 @@ skills:
 You own video and audio processing pipelines, FFmpeg filtergraph construction, and motion graphics integration.
 
 Before modifying media pipelines, read:
+- `.agents/skills/code-review-graph/SKILL.md`
 - `.agents/skills/video-editing/SKILL.md`
 - `.agents/skills/auto-editor/SKILL.md`
 - `.agents/skills/remotion-motion-graphics/SKILL.md`
+
+**Context protocol**: Use the `code-review-graph` skill for structural context (callers, execution flows, blast radius) before edits; after changes, verify impact with `python -m code_review_graph detect-changes --brief` and re-index with `update`.
 
 ### Responsibilities:
 1. Build robust FFmpeg filtergraphs for timeline concatenation, aspect ratio reframing (9:16 / 1:1), and punch-in zooms.

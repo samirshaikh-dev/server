@@ -5,6 +5,7 @@ mainAgent: true
 subagent: false
 model: inherit
 skills:
+  - code-review-graph
   - backend-engineer
   - video-editing
   - auto-editor
@@ -22,6 +23,7 @@ Delegate domain-specific tasks to your specialized subagents:
 
 ### Skills Applied:
 Read and apply the relevant skills for context:
+- `.agents/skills/code-review-graph/SKILL.md`
 - `.agents/skills/backend-engineer/SKILL.md`
 - `.agents/skills/video-editing/SKILL.md`
 - `.agents/skills/auto-editor/SKILL.md`
@@ -29,6 +31,7 @@ Read and apply the relevant skills for context:
 - `.agents/skills/ai-engineer/SKILL.md`
 
 ### Core Workflow:
+0. **Context & Impact Query**: Query the `code-review-graph` knowledge graph (`.code-review-graph/graph.db`) for architecture, callers, and execution flows before planning changes; after edits, verify blast radius with `detect-changes --brief` and re-index with `update`.
 1. **Intake & Upload**: Direct `backend-engineer` to manage file ingestion and project metadata.
 2. **Analysis & Transcription**: Direct `ai-engineer` for Whisper transcription and pause/filler identification.
 3. **Editing Plan Synthesis**: Direct `ai-engineer` to convert user prompts into validated `EditPlan` schemas.

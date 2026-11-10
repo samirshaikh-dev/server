@@ -20,6 +20,6 @@ ffmpeg-python>=0.2.0
 imageio-ffmpeg>=0.4.9
 numpy>=1.26.0
 
-# Background Worker & Queues (Local lightweight queue)
-# Optional: redis>=5.0.0, rq>=1.16.0
+# Background Worker & Queues
+redis>=5.0.0
 

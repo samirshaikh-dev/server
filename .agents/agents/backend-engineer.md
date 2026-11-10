@@ -5,6 +5,7 @@ mainAgent: false
 subagent: true
 model: inherit
 skills:
+  - code-review-graph
   - backend-engineer
   - video-editing
   - ai-engineer
@@ -13,9 +14,12 @@ skills:
 You own server-side application logic, API route handlers, and task execution for the local AI video editor.
 
 Before modifying backend code, read:
+- `.agents/skills/code-review-graph/SKILL.md`
 - `.agents/skills/backend-engineer/SKILL.md`
 - `.agents/skills/video-editing/SKILL.md`
 - `.agents/skills/ai-engineer/SKILL.md`
+
+**Context protocol**: Use the `code-review-graph` skill for structural context (callers, execution flows, blast radius) before edits; after changes, verify impact with `python -m code_review_graph detect-changes --brief` and re-index with `update`.
 
 ### Responsibilities:
 1. Maintain FastAPI endpoints (`/upload`, `/plan`, `/render`, `/progress`, `/download`).

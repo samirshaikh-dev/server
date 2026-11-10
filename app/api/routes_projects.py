@@ -9,6 +9,7 @@ from app.models.project import ProjectMetadata, JobStatus, CreatePlanRequest
 from app.models.edit_plan import EditPlan
 from app.workers.queue import job_queue
 from app.services.audio_extractor import extract_audio
+from app.services.transcriber import transcribe_audio
 from app.services.silence_detector import detect_silence_ffmpeg, invert_silences_to_speech
 from app.services.captioner import generate_ass_subtitles
 from app.services.planner import generate_edit_plan_llm
@@ -59,28 +60,13 @@ async def create_plan(project_id: str, req: CreatePlanRequest):
     audio_path = project_dir / "audio" / "speech.wav"
     extract_audio(raw_video, audio_path)
 
-    await job_queue.update_progress(project_id, JobStatus.TRANSCRIBING, 30, "Detecting silence & speech boundaries")
-    silences = detect_silence_ffmpeg(audio_path)
-    speech_ranges = invert_silences_to_speech(silences, total_duration=120.0)
+    await job_queue.update_progress(project_id, JobStatus.TRANSCRIBING, 30, "Transcribing speech with word timestamps")
+    transcript = transcribe_audio(audio_path)
 
-    # Build mock transcript segments from speech ranges for demonstration/local testing
-    segments = []
-    all_words = []
-    for idx, (s, e) in enumerate(speech_ranges):
-        seg_text = f"Sample speech segment {idx + 1}"
-        words = [
-            WordTimestamp(word=w, start=s + (i * 0.3), end=s + ((i + 1) * 0.3))
-            for i, w in enumerate(seg_text.split())
-        ]
-        segments.append(Segment(id=idx, start=s, end=e, text=seg_text, words=words))
-        all_words.extend(words)
-
-    transcript = TranscriptResult(
-        duration=120.0,
-        full_text=" ".join(s.text for s in segments),
-        segments=segments,
-        words=all_words
-    )
+    # Persist transcript
+    trans_path = project_dir / "transcripts" / "transcript.json"
+    trans_path.parent.mkdir(parents=True, exist_ok=True)
+    trans_path.write_text(transcript.model_dump_json(indent=2), encoding="utf-8")
 
     await job_queue.update_progress(project_id, JobStatus.PLANNING, 50, "Generating Edit Plan")
     plan = await generate_edit_plan_llm(

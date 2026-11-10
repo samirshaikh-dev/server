@@ -1,17 +1,59 @@
 {
   "version": 1,
   "skills": {
-    "aituber-api": {
-      "source": "aituberapp/ai-video-skill",
+    "audio-mixing-mastering": {
+      "source": "calesthio/generative-media-skills",
       "sourceType": "github",
-      "skillPath": "SKILL.md",
-      "computedHash": "9eb4430aaf0f73a433d0f8e02f31e4c44c58d36029f3b76c486c388662e67f44"
+      "skillPath": "skills/production/audio-craft/audio-mixing-mastering/SKILL.md",
+      "computedHash": "1ad04f46da3ec543efbe20987401d79a351652038e37db19eb6ef420c7d77cc7"
     },
-    "find-skills": {
-      "source": "vercel-labs/skills",
+    "auto-editor": {
+      "source": "wyattblue/auto-editor",
       "sourceType": "github",
-      "skillPath": "skills/find-skills/SKILL.md",
-      "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396"
+      "skillPath": "skills/auto-editor/SKILL.md",
+      "computedHash": "33bf578ebd39d6e8548e0af7fb52d66621382bd984dfd99f3d214eaffad9a988"
+    },
+    "auto-editor-transcribe": {
+      "source": "wyattblue/auto-editor",
+      "sourceType": "github",
+      "skillPath": "skills/auto-editor-transcribe/SKILL.md",
+      "computedHash": "1866bcc42cd17a42f24706f052315cd3756994594befd374e61d06428103c7de"
+    },
+    "caption-animation": {
+      "source": "iart-ai/tiktok-video-skills",
+      "sourceType": "github",
+      "skillPath": "skills/caption-animation/SKILL.md",
+      "computedHash": "1bcfe2026d1b2a81ff7257d7149f4a555d6d28e238be909050c308bec85ea513"
+    },
+    "ffmpeg-captions-subtitles": {
+      "source": "josiahsiegel/claude-plugin-marketplace",
+      "sourceType": "github",
+      "skillPath": "plugins/ffmpeg-core/skills/ffmpeg-captions-subtitles/SKILL.md",
+      "computedHash": "80e3e35dfefa6b6ca2587d9d580845954c2b5e86d6471807b142f98b544f3e02"
+    },
+    "ffmpeg-video-editor": {
+      "source": "sundial-org/awesome-openclaw-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ffmpeg-video-editor/SKILL.md",
+      "computedHash": "c50ad166c0b6b916007871c60ea6c75cd45a571d7669559ee7c163c995304c93"
+    },
+    "remotion-motion-graphics": {
+      "source": "haidrrrry/claude-remotion-skill",
+      "sourceType": "github",
+      "skillPath": "remotion-motion-graphics/SKILL.md",
+      "computedHash": "9f37670b538d1aad5549603da2cd9d67401016dd20c1d8a0c292e904a9f03fbf"
+    },
+    "sound-design-film": {
+      "source": "guia-matthieu/clawfu-skills",
+      "sourceType": "github",
+      "skillPath": "skills/audio/sound-design-film/SKILL.md",
+      "computedHash": "d5ee20224b799e4dd764317b4dc8c9a36a999829ddd6d5eff59a4d7384f56835"
+    },
+    "video-editing": {
+      "source": "affaan-m/ecc",
+      "sourceType": "github",
+      "skillPath": "skills/video-editing/SKILL.md",
+      "computedHash": "021c5b9207697949a1a40c936617793e3db0cb03904f3c3388e153337c290da1"
     }
   }
 }
